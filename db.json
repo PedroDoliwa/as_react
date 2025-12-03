@@ -1,12 +1,12 @@
 {
   "produtos": [
     {
-      "id": 1,
-      "nome": "Notebook Gamer",
+      "nome": "Notebook Gamer master 3.2",
       "descricao": "Notebook gamer de alta performance com placa de vídeo dedicada, ideal para jogos e trabalho pesado.",
       "preco": 3499.99,
       "imagem": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500",
-      "estoque": 5
+      "estoque": 5,
+      "id": 1
     },
     {
       "id": 2,
@@ -41,12 +41,12 @@
       "estoque": 8
     },
     {
-      "nome": "Pão",
-      "descricao": "pão cereja",
-      "preco": 10,
-      "imagem": "https://panutti.com.br/resize/imagecache//05fcc15112230b27fb0d858082395ca2.jpg",
-      "estoque": 5,
-      "id": 6
+      "nome": "Xbox One",
+      "descricao": "video game",
+      "preco": 3200,
+      "imagem": "https://m.media-amazon.com/images/I/71cAq3tEZAL.jpg",
+      "estoque": 3,
+      "id": 7
     }
   ]
 }
