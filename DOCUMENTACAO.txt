@@ -1,0 +1,207 @@
+================================================================================
+                    MINI E-COMMERCE COM REACT
+                    Documentação do Projeto
+
+DESCRIÇÃO
+---------
+Aplicação frontend de e-commerce desenvolvida com React, React Router, Context 
+API e TailwindCSS. Simula um pequeno e-commerce com gerenciamento de produtos 
+e carrinho de compras.
+
+================================================================================
+COMO RODAR O PROJETO
+
+PRÉ-REQUISITOS
+--------------
+- Node.js versão 16 ou superior
+- npm ou yarn
+
+INSTALAÇÃO
+----------
+1. Clone o repositório ou navegue até a pasta do projeto
+2. Execute o comando:
+   npm install
+
+EXECUÇÃO
+--------
+O projeto precisa de dois servidores rodando simultaneamente:
+
+1. Iniciar o JSON Server (API):
+   Comando: npm run server
+   A API estará disponível em: http://localhost:3001
+
+2. Iniciar a aplicação React:
+   Comando: npm run dev
+   A aplicação estará disponível em: http://localhost:5173
+
+================================================================================
+FUNCIONALIDADES
+
+- Listagem de produtos da API
+- Visualização de detalhes de produtos
+- Adicionar produtos ao carrinho (respeitando estoque)
+- Gerenciar quantidade no carrinho (aumentar/diminuir)
+- Remover itens do carrinho
+- Cadastro de novos produtos
+- Edição de produtos existentes
+- Deletar produtos
+- Validações de formulário com feedback visual
+- Interface responsiva com TailwindCSS
+- Persistência do carrinho no localStorage
+
+================================================================================
+ESTRUTURA DO PROJETO
+
+src/
+├── components/          # Componentes reutilizáveis
+│   ├── Layout.jsx      # Layout principal com navegação
+│   └── ProductCard.jsx # Card de produto
+├── context/            # Context API
+│   └── CartContext.jsx # Contexto do carrinho
+├── pages/              # Páginas da aplicação
+│   ├── Home.jsx        # Listagem de produtos
+│   ├── ProductDetails.jsx # Detalhes do produto
+│   ├── Cart.jsx        # Carrinho de compras
+│   ├── ProductForm.jsx # Formulário de cadastro
+│   ├── EditProduct.jsx # Formulário de edição
+│   └── NotFound.jsx    # Página 404
+├── services/           # Serviços de API
+│   └── api.js          # Funções de consumo da API
+├── App.jsx             # Componente principal com rotas
+├── main.jsx            # Ponto de entrada
+└── index.css           # Estilos globais (TailwindCSS)
+
+Arquivos na raiz:
+- db.json              # Banco de dados do JSON Server
+- package.json         # Dependências do projeto
+- vite.config.js       # Configuração do Vite
+- tailwind.config.js   # Configuração do TailwindCSS
+
+================================================================================
+PÁGINAS DA APLICAÇÃO
+
+Home (/)
+--------
+Lista todos os produtos disponíveis com imagem, nome e preço. Exibe badge 
+"Esgotado" quando o estoque é 0. Permite navegar para detalhes do produto, 
+carrinho e cadastro de produtos.
+
+Detalhes do Produto (/produto/:id)
+-----------------------------------
+Exibe informações completas do produto incluindo descrição, preço e estoque 
+disponível. Permite adicionar o produto ao carrinho com validações de estoque.
+
+Carrinho (/carrinho)
+--------------------
+Gerencia todos os itens adicionados ao carrinho. Permite aumentar/diminuir 
+quantidade, remover itens e visualizar o total da compra. Respeita o limite 
+de estoque disponível.
+
+Cadastro de Produto (/cadastro)
+--------------------------------
+Formulário para cadastrar novos produtos com os campos: nome, descrição, preço, 
+URL da imagem e estoque. Inclui validações de campos obrigatórios e tipos.
+
+Edição de Produto (/editar/:id)
+--------------------------------
+Formulário pré-preenchido para editar produtos existentes. Mesmas validações 
+do cadastro. Após editar, redireciona para a página Home.
+
+Página 404
+----------
+Exibida quando uma rota não é encontrada. Inclui link para voltar à Home.
+
+================================================================================
+PRINCIPAIS CONCEITOS UTILIZADOS
+
+HOOKS DO REACT
+--------------
+useState
+  Gerenciamento de estados locais em componentes (formulários, loading, erros, 
+  produtos, etc.)
+
+useEffect
+  Buscar dados da API ao montar componentes e persistência do carrinho no 
+  localStorage
+
+useContext
+  Consumo do Context API do carrinho em múltiplos componentes
+
+useNavigate
+  Navegação programática entre rotas (após cadastro, edição, etc.)
+
+useParams
+  Captura de parâmetros da URL (ex: ID do produto)
+
+useRef
+  Foco automático em campos inválidos do formulário para melhorar UX
+
+CONTEXT API
+-----------
+O carrinho é gerenciado globalmente através do CartContext, permitindo:
+- Adicionar produtos ao carrinho
+- Remover produtos do carrinho
+- Atualizar quantidades
+- Validar estoque disponível
+- Persistir no localStorage automaticamente
+- Acessar o carrinho de qualquer componente sem prop drilling
+
+API (JSON SERVER)
+-----------------
+Endpoints utilizados:
+
+GET /produtos
+  Lista todos os produtos disponíveis
+
+GET /produtos/:id
+  Busca um produto específico por ID
+
+POST /produtos
+  Cria um novo produto
+  Corpo: { nome, descricao, preco, imagem, estoque }
+
+PUT /produtos/:id
+  Atualiza um produto existente
+  Corpo: { nome, descricao, preco, imagem, estoque }
+
+DELETE /produtos/:id
+  Remove um produto da API
+
+Base URL: http://localhost:3001
+
+================================================================================
+VALIDAÇÕES IMPLEMENTADAS
+
+FORMULÁRIOS
+-----------
+- Todos os campos são obrigatórios
+- Preço deve ser um número maior ou igual a 0
+- Estoque deve ser um número inteiro maior ou igual a 0
+- Mensagens de erro exibidas abaixo dos inputs
+- Foco automático no primeiro campo inválido
+
+CARRINHO
+--------
+- Não permite adicionar mais produtos do que o estoque disponível
+- Bloqueia aumento de quantidade quando atinge o limite de estoque
+- Não permite diminuir quantidade abaixo de 1
+- Exibe mensagens informativas ("Estoque máximo atingido", "Produto esgotado")
+
+================================================================================
+TECNOLOGIAS UTILIZADAS
+
+- React 18
+- React Router DOM 6
+- TailwindCSS 3
+- Vite 5
+- JSON Server
+
+================================================================================
+OBSERVAÇÕES IMPORTANTES
+
+- O JSON Server precisa estar rodando para a aplicação funcionar
+- O carrinho é persistido automaticamente no localStorage
+- Todas as validações são feitas no frontend
+- A aplicação é totalmente responsiva (mobile-first)
+
+
